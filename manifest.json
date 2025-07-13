@@ -1,0 +1,10 @@
+{
+  "name": "Language Translator Widget",
+  "description": "Detects language and translates Nostr posts",
+  "version": "1.0.0",
+  "type": "tool",
+  "entry": "widget.html",
+  "handler": "handler.js",
+  "permissions": ["read", "http"],
+  "tags": ["translate", "language", "ai", "nostr"]
+}
