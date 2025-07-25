@@ -3,8 +3,8 @@
   "widget": {
     "title": "AI Language Translator",
     "appUrl": "https://agentic-mini-app.onrender.com",
-    "iconUrl": "https://image.nostr.build/f37748a77ab4d588c99e987751b38b25a431488e0342811d8a5445885eefb275.jpg",
-    "imageUrl": "https://image.nostr.build/0cea0196eb020322196a1102937b624c8a7b5dba47deb60305c89f0c7212062e.jpg",
+    "iconUrl": "https://image.nostr.build/ae41b13406f141032bf5e4d44f6b58ad4782ba9673c6f79acdd74cfea7559f2d.jpg",
+    "imageUrl": "https://image.nostr.build/65cac61882e9dc8d950f8e8b5f2e4e154c967a01ea84bf5960fc135b61a011eb.jpg",
     "buttonTitle": "Reset Language Peference",
     "tags": ["translation", "language", "ai", "nostr", "widget", "yakihonne"]
   }

@@ -1,13 +1,5 @@
 import fetch from "node-fetch";
 
-/**
- * @typedef {Object} TranslationResponse
- * @property {string} translation - The translated text or an error message.
- * @property {string} detectedLanguage - The detected source language.
- *
- * @param {Object} req - The request object containing the content and the target language.
- * @returns {Promise<TranslationResponse>}
- */
 export default async function handler(req, res) {
   try {
     const { content, lang } = req.body;

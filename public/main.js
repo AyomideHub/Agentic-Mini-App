@@ -10,15 +10,7 @@ const langMap = {
   ko: "korean",
   zh: "chinese",
 };
-// window.postMessage(
-//     {
-//       type: "yakihonne:context",
-//       payload: {
-//         content: "Hello, how are you?",
-//       },
-//     },
-//     "*"
-//   );
+
 // browser language or saved preference
 const browserLang = navigator.language || navigator.userLanguage;
 const storedLang = localStorage.getItem("preferredLang");
@@ -58,7 +50,7 @@ async function translateNow() {
   // Update UI with detected language and translated result
   document.getElementById(
     "translated"
-  ).innerText = `🕵️ Detected Language: ${data.detectedLanguage}\n🔁 Translation:\n${data.translation}`;
+  ).innerText = `Detected Language: ${data.detectedLanguage}\n🔁 Translation:\n${data.translation}`;
 }
 
 // Reset Button Logic

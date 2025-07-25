@@ -9,8 +9,16 @@ import helmet from "helmet";
 const app = express();
 
 app.use(cors()); // Enable CORS for all routes
-app.use(helmet()); //  Helmet for security 
-
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "frame-ancestors": ["'self'", "https://yakihonne.com", "https://yakihonne.com/sw-playground"], // For testing, allow all. For production, restrict as needed.
+      },
+    },
+  })
+);
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
