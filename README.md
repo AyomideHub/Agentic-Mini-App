@@ -24,9 +24,9 @@ Yakihonne context injects post → sends to API → Mixtral replies → displays
 
 ## 📁 Project Structure
 
-language-switcher-widget/
-├── widget.html # UI layout and language dropdown
-├── handler.js # Translation logic using OpenAI
+language-translator-widget/
+├── public/index.html # UI layout and language dropdown
+├── controller.js # Translation logic using GROQ
 └── manifest.json # Widget configuration for Yakihonne
 
 
@@ -38,7 +38,7 @@ language-switcher-widget/
 |-----------|------|
 | HTML, JavaScript | Frontend user interface |
 | Node.js/Express.js (`controller.js`) |
-| Grop API | Language detection & translation |
+| GROQ API | Language detection & translation |
 | Yakihonne | Smart Widget Platform & Nostr integration |
 
 ---
