@@ -16,8 +16,7 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: [
           "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
+          "'unsafe-inline'", // Only if you need inline scripts, otherwise remove this too
           "https://unpkg.com"
         ],
         connectSrc: [
@@ -46,6 +45,8 @@ app.use(
     }
   })
 );
+
+
 app.use(helmet.referrerPolicy({ policy: "no-referrer" })); // Set referrer policy
 
 
