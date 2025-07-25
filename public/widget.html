@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Language Translator Widget Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <div class="card" style="max-width:500px;margin:2rem auto;">
+    <h2>🌍 Translate This Post (Widget Preview)</h2>
+    <div id="original" style="margin-bottom:1em;">📝 Original:</div>
+    <select id="lang">
+      <option value="english">English</option>
+      <option value="french">French</option>
+      <option value="spanish">Spanish</option>
+      <option value="yoruba">Yoruba</option>
+      <option value="arabic">Arabic</option>
+      <option value="korean">Korean</option>
+      <option value="chinese">Chinese</option>
+    </select>
+    <button id="resetBtn" style="margin-left:1em;">Reset</button>
+    <div id="translated" style="margin-top:1em;">🔁 Translation:</div>
+  </div>
+  <script src="main.js"></script>
+  <!-- <script>
+    // Simulate context for preview
+    window.addEventListener("DOMContentLoaded", () => {
+      window.postMessage({ type: "yakihonne-preview-content", content: "Hello, how are you today?" }, "*");
+    });
+  </script> -->
+</body>
+</html>
