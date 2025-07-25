@@ -35,14 +35,13 @@ document.getElementById("lang").addEventListener("change", () => {
 });
 
 // Listening for Yakihonne message event
-window.addEventListener("message", async (event) => {
-  if (event.data?.type === "yakihonne:context") {
-    content = event.data.payload?.content || "";
+if (window.YakihonneWidgetSDK) {
+  window.YakihonneWidgetSDK.ready().then((context) => {
+    content = context?.content || context?.text || "";
     document.getElementById("original").innerText = "📝 Original:\n" + content;
-
-    await translateNow();
-  }
-});
+    translateNow();
+  });
+}
 
 // function to detected language
 async function translateNow() {

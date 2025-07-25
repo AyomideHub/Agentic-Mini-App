@@ -2,8 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import controller from "./backend/controller.js";
 dotenv.config();
+import cors from "cors";
+import helmet from "helmet";  
+
 // Initialize Express app
 const app = express();
+
+app.use(cors()); // Enable CORS for all routes
+app.use(helmet()); //  Helmet for security 
 
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
