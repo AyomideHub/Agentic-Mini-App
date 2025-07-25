@@ -16,7 +16,6 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: [
           "'self'",
-          "'unsafe-inline'", // Only if you need inline scripts, otherwise remove this too
           "https://unpkg.com"
         ],
         connectSrc: [
