@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>🌍 AI Language Translator</title>
-	<link rel="stylesheet" href="main.css">
-	
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌍 AI Language Translator</title>
+  <link rel="stylesheet" href="main.css" />
 </head>
+
 <body>
-   <!-- This widget allows you to translate text into different languages using AI. -->
-<div class="card">
+  <div class="card">
     <h2>🌍 Translate This Post</h2>
 
-     <!-- Choose language -->
+    <!-- Choose language -->
     <label for="lang">Choose a language:</label>
     <select id="lang">
       <option value="english">English</option>
@@ -20,12 +20,19 @@
       <option value="yoruba">Yoruba</option>
       <option value="spanish">Spanish</option>
       <option value="arabic">Arabic</option>
+      <option value="korean">Korean</option>
+      <option value="chinese">Chinese</option>
     </select>
 
+    <!-- Reset language preference -->
+    <button id="resetBtn" style="margin-top: 10px;">🔄 Reset Language Preference</button>
+
+    <!-- Original and translated text display -->
     <div class="text-box" id="original"><strong>📝 Original:</strong> Loading...</div>
     <div class="text-box" id="translated"><strong>🔁 Translation:</strong></div>
   </div>
 
   <script src="main.js"></script>
 </body>
+
 </html>

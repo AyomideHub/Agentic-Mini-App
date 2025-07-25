@@ -1,121 +1,79 @@
-// // let content = "";
-// //     window.addEventListener("message", async (event) => {
-// // 		event.preventDefault()
-// //       if (event.data?.type === "yakihonne:context") {
-// //         content = event.data.payload?.content || '';
-// // 		console.log("clicked1")
-// //         document.getElementById("original").innerText = "📝 Original:\n" + content;
-// // 		console.log("clicked2")
-// //         await translateNow();
-// // 		console.log("clicked4")
-// //       }
-// //     });
+let content = "";
 
-// //     document.getElementById('lang').addEventListener('change', ()=>console.log('clicked5'));
+// supported languages
+const langMap = {
+  en: "english",
+  fr: "french",
+  es: "spanish",
+  yo: "yoruba",
+  ar: "arabic",
+  ko: "korean",
+  zh: "chinese",
+};
+// window.postMessage(
+//     {
+//       type: "yakihonne:context",
+//       payload: {
+//         content: "Hello, how are you?",
+//       },
+//     },
+//     "*"
+//   );
+// browser language or saved preference
+const browserLang = navigator.language || navigator.userLanguage;
+const storedLang = localStorage.getItem("preferredLang");
+const defaultLang = storedLang || langMap[browserLang.slice(0, 2)] || "english";
 
-// //     async function translateNow(e) {
-// // 		e.preventDefault()
-// // 		console.log("clicked3")
-// //       const lang = document.getElementById('lang').value;
-// //       const res = await fetch("../backend/controller.js", {
-// //         method: "POST",
-// //         headers: { "Content-Type": "application/json" },
-// //         body: JSON.stringify({ content, lang })
-// //       });
-// //       const data = await res.json();
-// //       document.getElementById("translated").innerText = "🔁 Translation:\n" + data.translation;
-// //     }
+// Setting initial dropdown value
+document.getElementById("lang").value = defaultLang;
 
+// Saving user-selected language to localStorage
+document.getElementById("lang").addEventListener("change", () => {
+  const lang = document.getElementById("lang").value;
+  localStorage.setItem("preferredLang", lang);
+  translateNow();
+});
 
+// Listening for Yakihonne message event
+window.addEventListener("message", async (event) => {
+  if (event.data?.type === "yakihonne:context") {
+    content = event.data.payload?.content || "";
+    document.getElementById("original").innerText = "📝 Original:\n" + content;
 
-//   let content = "";
+    await translateNow();
+  }
+});
 
-//   // Detect browser language OR use saved one
-//   const browserLang = navigator.language || navigator.userLanguage; // e.g. "en", "fr", "yo"
-//   const langMap = {
-//     "en": "english",
-//     "fr": "french",
-//     "es": "spanish",
-//     "yo": "yoruba",
-//     "ar": "arabic"
-//   };
+// function to detected language
+async function translateNow() {
+  const lang = document.getElementById("lang").value;
+  
+  const res = await fetch("/api/translate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content, lang }),
+  });
 
-//   const storedLang = localStorage.getItem("preferredLang");
-//   const defaultLang = storedLang || langMap[browserLang.slice(0, 2)] || "english";
+  const data = await res.json();
 
-//   document.getElementById("lang").value = defaultLang;
+  // Update UI with detected language and translated result
+  document.getElementById(
+    "translated"
+  ).innerText = `🕵️ Detected Language: ${data.detectedLanguage}\n🔁 Translation:\n${data.translation}`;
+}
 
-//   // Save new language to localStorage when changed
-//   document.getElementById("lang").addEventListener('change', () => {
-//     const lang = document.getElementById("lang").value;
-//     localStorage.setItem("preferredLang", lang);
-//     translateNow(); // re-run
-//   });
+// Reset Button Logic
+document.getElementById("resetBtn").addEventListener("click", () => {
+  localStorage.removeItem("preferredLang");
 
-//   // Wait for Nostr post context from Yakihonne
-//   window.addEventListener("message", async (event) => {
-//     if (event.data?.type === "yakihonne:context") {
-//       content = event.data.payload?.content || '';
-//       document.getElementById("original").innerText = "📝 Original:\n" + content;
-//       await translateNow();
-//     }
-//   });
+  const resetLang =
+    langMap[(navigator.language || "en").slice(0, 2)] || "english";
+  document.getElementById("lang").value = resetLang;
 
-//   // Call backend to translate
-//   async function translateNow() {
-//     const lang = document.getElementById('lang').value;
-//     const res = await fetch("handler.js", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ content, lang })
-//     });
-//     const data = await res.json();
-//     document.getElementById("translated").innerText = "🔁 Translation:\n" + data.translation;
-//   }
-//   // Initial translation on page load
-//   document.addEventListener("DOMContentLoaded", () => {
-//     const lang = document.getElementById("lang").value;
-//     translateNow();
-//   });
+  document.getElementById("translated").innerText = "🔁 Translation:";
+});
 
-
- let content = "";
-
-    const langMap = {
-      "en": "english",
-      "fr": "french",
-      "es": "spanish",
-      "yo": "yoruba",
-      "ar": "arabic"
-    };
-
-    const storedLang = localStorage.getItem("preferredLang");
-    const browserLang = navigator.language || navigator.userLanguage;
-    const defaultLang = storedLang || langMap[browserLang.slice(0, 2)] || "english";
-    document.getElementById("lang").value = defaultLang;
-
-    document.getElementById("lang").addEventListener("change", () => {
-      const lang = document.getElementById("lang").value;
-      localStorage.setItem("preferredLang", lang);
-      translateNow();
-    });
-
-
-    window.addEventListener("message", async (event) => {
-      if (event.data?.type === "yakihonne:context") {
-        content = event.data.payload?.content || '';
-        document.getElementById("original").innerText = "📝 Original:\n" + content;
-        await translateNow();
-      }
-    });
-
-    async function translateNow() {
-      const lang = document.getElementById("lang").value;
-      const res = await fetch("/api/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content, lang })
-      });
-      const data = await res.json();
-      document.getElementById("translated").innerText = "🔁 Translation:\n" + data.translation;
-    }
+// Optional: Trigger translation on load if content exists
+document.addEventListener("DOMContentLoaded", () => {
+  if (content) translateNow();
+});

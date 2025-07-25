@@ -10,7 +10,15 @@ A Yakihonne-compatible agentic mini-app that auto-detects the language of a Nost
 - 🔁 Translates any Nostr post to your preferred language
 - 🌍 Supports multiple output languages
 - 📋 Displays original and translated versions side-by-side
-- 💸 Optional: Add a tip button for Lightning donations
+- Auto-detect language
+- Translate to English, French, Yoruba, Chinese, etc.
+- Save preferred language
+- Reset button to change back
+
+---
+
+## How it works
+Yakihonne context injects post → sends to API → Mixtral replies → displays translated result.
 
 ---
 
@@ -29,17 +37,13 @@ language-switcher-widget/
 | Tool/Tech | Role |
 |-----------|------|
 | HTML, JavaScript | Frontend user interface |
-| Node.js (`handler.js`) | Serverless AI processing |
-| OpenAI API | Language detection & translation |
+| Node.js/Express.js (`controller.js`) |
+| Grop API | Language detection & translation |
 | Yakihonne | Smart Widget Platform & Nostr integration |
 
 ---
 
-## 🧪 How to Test Locally
 
-> You must have [Node.js](https://nodejs.org) and Yakihonne CLI installed.
 
-### 1. Install Yakihonne CLI
 
-```bash
-npm install -g yakihonne
+

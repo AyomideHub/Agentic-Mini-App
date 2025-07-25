@@ -1,0 +1,11 @@
+{
+  "pubkey": "fa1c539b363afc2d145b95f42bf83a5defe69480b3a6270c58c6b1910945d05b",
+  "widget": {
+    "title": "AI Language Translator",
+    "appUrl": "http://localhost:3000/index.html",
+    "iconUrl": "https://image.nostr.build/f37748a77ab4d588c99e987751b38b25a431488e0342811d8a5445885eefb275.jpg",
+    "imageUrl": "https://image.nostr.build/0cea0196eb020322196a1102937b624c8a7b5dba47deb60305c89f0c7212062e.jpg",
+    "buttonTitle": "Reset Language Peference",
+    "tags": []
+  }
+}

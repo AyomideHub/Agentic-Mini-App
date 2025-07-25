@@ -15,7 +15,13 @@ app.use(express.static("public"));
 // Set up the translation endpoint
 // This endpoint will handle POST requests to translate text
 app.post("/api/translate", controller);
-
+// app.get("/", (req,  res) => {
+//   res.sendFile("index.html", { root: "public" });
+// }
+// )
+app.get("/.well-known", (req, res) => {
+  res.sendFile("widget.json", { root: "public" });
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

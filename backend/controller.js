@@ -1,41 +1,56 @@
-// File: backend/controller.js
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
-// This handler function processes translation requests
-// It expects a POST request with JSON body containing 'content' and 'lang'
-// It uses the Groq API to detect language and translate the content
-// Returns the translated text or an error message if translation fails
-
-/** * @typedef {Object} TranslationResponse
- * @property {string} translation - The translated text or an error message.    
- *    
- * @param {Object} req - The request object containing the content to translate and the target language.
- * @returns {Promise<TranslationResponse>} - An object containing the translated text or an error message.
+/**
+ * @typedef {Object} TranslationResponse
+ * @property {string} translation - The translated text or an error message.
+ * @property {string} detectedLanguage - The detected source language.
+ *
+ * @param {Object} req - The request object containing the content and the target language.
+ * @returns {Promise<TranslationResponse>}
  */
-export default async function handler(req) {
-  const { content, lang } = req.body;
+export default async function handler(req, res) {
+  try {
+    const { content, lang } = req.body;
 
-  const prompt = `Detect the language of this text and translate it into ${lang}. Only return the translated result:\n\n"${content}"`;
+    // Prompt explicitly asks for detected language and translation
+    const prompt = `Detect the language of this text. Then translate it into ${lang}. Reply with this format:
+Detected Language: <language>
+Translation: <translated text>
 
-  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "mixtral-8x7b-32768",
-      messages: [
-        { role: "system", content: "You are a multilingual translator." },
-        { role: "user", content: prompt }
-      ],
-      max_tokens: 300
-    })
-  });
+Text: """${content}"""`;
 
-  const data = await response.json();
-  const translation = data.choices?.[0]?.message?.content?.trim() || "⚠️ Translation failed.";
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "mixtral-8x7b-32768",
+          messages: [
+            { role: "system", content: "You are a helpful translator bot." },
+            { role: "user", content: prompt },
+          ],
+          max_tokens: 300,
+        }),
+      }
+    );
 
-  return { translation };
+    const data = await response.json();
+    const raw = data.choices?.[0]?.message?.content?.trim() || "";
+
+    const detectedMatch = raw.match(/Detected Language:\s*(.+)/i);
+    const translationMatch = raw.match(/Translation:\s*([\s\S]*)/i);
+
+    const detectedLanguage = detectedMatch?.[1]?.trim() || "Unknown";
+    const translation = translationMatch?.[1]?.trim() || "Translation failed.";
+
+    // return { translation, detectedLanguage };
+    res.json({ translation, detectedLanguage });
+  } catch (error) {
+    console.error("Error in translation handler:", error);
+    return res.status(500).json({ translation: "Error while translating." });
+  }
 }
-
