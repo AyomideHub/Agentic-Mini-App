@@ -1,8 +1,12 @@
 {
   "title": "AI Language Translator",
+  "pubkey": "fa1c539b363afc2d145b95f42bf83a5defe69480b3a6270c58c6b1910945d05b",
   "description": "Auto-detect and translate Nostr posts using AI.",
-  "entrypoint": "widget.html",
+  "entrypoint": "public/index.html",
   "icon": "🌍",
+  "appUrl": "http://localhost:3000/index.html",
+  "iconUrl": "https://image.nostr.build/f37748a77ab4d588c99e987751b38b25a431488e0342811d8a5445885eefb275.jpg",
+  "imageUrl": "https://image.nostr.build/0cea0196eb020322196a1102937b624c8a7b5dba47deb60305c89f0c7212062e.jpg",
   "permissions": ["context"],
   "author": "potentturn04@walletofsatoshi.com",
   "tags": ["translation", "language", "ai", "nostr", "widget", "yakihonne"],

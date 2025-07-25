@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from the "public" directory
+app.use('/.well-known', express.static('public/.well-known'));
 app.use(express.static("public"));
 
 // Set up the translation endpoint
