@@ -47,7 +47,7 @@ window.addEventListener("message", async (event) => {
 // function to detected language
 async function translateNow() {
   const lang = document.getElementById("lang").value;
-  
+
   const res = await fetch("/api/translate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   document.getElementById("translated").innerText = "🔁 Translation:";
 });
 
-// Optional: Trigger translation on load if content exists
+// to Trigger translation on load if content exists
 document.addEventListener("DOMContentLoaded", () => {
   if (content) translateNow();
 });

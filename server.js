@@ -20,7 +20,7 @@ app.post("/api/translate", controller);
 // }
 // )
 app.get("/.well-known", (req, res) => {
-  res.sendFile("widget.json", { root: "public" });
+  res.sendFile("manifest.json", { root: "public" });
 });
 
 const port = process.env.PORT || 3000;

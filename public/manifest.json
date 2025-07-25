@@ -1,5 +1,5 @@
 {
-  "name": "AI Language Translator",
+  "title": "AI Language Translator",
   "description": "Auto-detect and translate Nostr posts using AI.",
   "entrypoint": "widget.html",
   "icon": "🌍",

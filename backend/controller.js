@@ -12,7 +12,6 @@ export default async function handler(req, res) {
   try {
     const { content, lang } = req.body;
 
-    // Prompt explicitly asks for detected language and translation
     const prompt = `Detect the language of this text. Then translate it into ${lang}. Reply with this format:
 Detected Language: <language>
 Translation: <translated text>
