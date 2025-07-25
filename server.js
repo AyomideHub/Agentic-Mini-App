@@ -13,22 +13,42 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "frame-ancestors": [
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://unpkg.com"
+        ],
+        connectSrc: [
+          "'self'",
+          "https://api.groq.com"
+        ],
+        imgSrc: [
+          "'self'",
+          "https:",
+          "data:"
+        ],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'"
+        ],
+        frameAncestors: [
           "'self'",
           "https://yakihonne.com",
           "https://yakihonne.com/sw-playground",
-          "https://playground.yakihonne.com",
-          "*"
+          "https://playground.yakihonne.com"
         ],
-        "script-src": [
-          "'self'",
-          "https://unpkg.com"
-        ],
-      },
-    },
+        formAction: [
+          "'self'"
+        ]
+      }
+    }
   })
 );
+app.use(helmet.referrerPolicy({ policy: "no-referrer" })); // Set referrer policy
+
+
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
