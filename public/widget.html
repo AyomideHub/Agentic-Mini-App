@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Language Translator Widget</title>
+  <title>Yakihonne AI Translator Widget</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="main.css" /> -->
+  <link rel="stylesheet" href="/main.css" />
 </head>
 <body>
   <div class="card">
     <h2>🌍 Translate This Post</h2>
-    <div id="original">📝 Original:</div>
+
+    <div id="original" class="text-box">
+      📝 Original:
+    </div>
+
+    <label for="lang">Select Language</label>
     <select id="lang">
       <option value="english">English</option>
       <option value="french">French</option>
@@ -19,11 +24,14 @@
       <option value="korean">Korean</option>
       <option value="chinese">Chinese</option>
     </select>
+
     <button id="resetBtn">Reset</button>
-    <div id="translated">🔁 Translation:</div>
+
+    <div id="translated" class="text-box">
+      🔁 Translation:
+    </div>
   </div>
 
-  <!-- ✅ Load Webpack output
-  <script src="main.js"></script> -->
+  <script src="./main.js"></script>
 </body>
 </html>
