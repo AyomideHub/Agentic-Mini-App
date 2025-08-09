@@ -4,6 +4,9 @@ const { client } = SWHandler;
 
 let content = "";
 
+  // Tell parent we're ready
+  client.ready();
+
 document.addEventListener("DOMContentLoaded", () => {
   // Restore saved language
   const savedLang = localStorage.getItem("preferredLang");
@@ -11,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("lang").value = savedLang;
   }
 
-  // Tell parent we're ready
-  client.ready();
+
 
   // Listen for Yakihonne context
   client.listen((event) => {
@@ -42,7 +44,7 @@ async function translateNow() {
   const lang = document.getElementById("lang").value;
 
   try {
-    const res = await fetch("/api/translate", {
+    const res = await fetch("https://agentic-mini-app.onrender.com/api/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content, lang })
